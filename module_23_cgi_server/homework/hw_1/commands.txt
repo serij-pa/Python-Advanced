@@ -1,0 +1,5 @@
+docker build . -f Dockerfile -t mod_23_hw1
+Первой командой мы собираем образ и называем его
+
+docker run -ti -p 5000:5000 mod_23_hw1
+второй запускаем образ
