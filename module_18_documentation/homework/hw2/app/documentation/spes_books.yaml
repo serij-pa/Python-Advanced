@@ -1,0 +1,98 @@
+definitions:
+  Book:
+    properties:
+      author:
+        type: integer
+      id:
+        readOnly: true
+        type: integer
+      title:
+        type: string
+    required:
+      - author
+      - title
+    type: object
+  BookPatch:
+    properties:
+      author:
+        type: integer
+      id:
+        readOnly: true
+        type: integer
+      title:
+        type: string
+    type: object
+info:
+  title: BooksList
+  version: 1.0.0
+paths:
+  "/api/books":
+    get:
+      tags:
+        - books
+      responses:
+        200:
+          description: Book data
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Book"
+    post:
+      tags:
+        - books
+      parameters:
+        - in: body
+          name: Новая книга
+          schema:
+            "$ref": "#/definitions/Book"
+      responses:
+        201:
+          description: Книга создана
+          schema:
+            "$ref": "#/definitions/Book"
+      summary: This is an endpoint for book creation.
+  /api/books/<book_id>:
+    get:
+      tags:
+        - books
+      summary: Получение книги по id
+      parameters:
+        - name: book_id
+          in: path
+          type: integer
+      responses:
+        "200":
+          description: Ответ
+          Schema:
+            "$ref": "#/definitions/Book"
+    put:
+      tags:
+        - books
+      summary: Полное изменение данных о книге
+      parameters:
+        - name: book_id
+          in: path
+          type: integer
+        - in: body
+          name: Полное изменение данных о книге
+          schema:
+            "$ref": "#/definitions/Book"
+      responses:
+        "200":
+          description: Изменение книги
+          schema:
+            "$ref": "#/definitions/Book"
+    delete:
+      tags:
+        - books
+      summary: Удаление книги по id
+      parameters:
+        - name: book_id
+          in: path
+          type: integer
+      responses:
+        "200":
+          description: Ответ
+          schema:
+            "$ref": "#/definitions/Book"
+swagger: 2.0

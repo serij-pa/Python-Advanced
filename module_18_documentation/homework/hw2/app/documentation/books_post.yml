@@ -1,0 +1,29 @@
+Создание новой книги.
+---
+tags:
+  - books
+parameters:
+  - in: body
+    name: Новая книга
+    schema:
+      "$ref": "#/definitions/Book"
+responses:
+  "201":
+    description: Книга создана
+    schema:
+      "$ref": "#/definitions/Book"
+
+definitions:
+  Book:
+    properties:
+      author:
+        type: integer
+      id:
+        readOnly: true
+        type: integer
+      title:
+        type: string
+    required:
+      - author
+      - title
+    type: object

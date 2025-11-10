@@ -1,0 +1,28 @@
+Получение книги по id
+---
+tags:
+  - books
+parameters:
+  - name: book_id
+    in: path
+    type: integer
+responses:
+  "200":
+    description: Ответ
+    Schema:
+      "$ref": "#/definitions/Book"
+
+definitions:
+  Book:
+    properties:
+      author:
+        type: integer
+      id:
+        readOnly: true
+        type: integer
+      title:
+        type: string
+    required:
+      - author
+      - title
+    type: object

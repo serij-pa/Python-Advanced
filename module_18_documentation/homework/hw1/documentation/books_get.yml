@@ -1,0 +1,26 @@
+Вывод всех книг.
+---
+tags:
+  - books
+responses:
+  200:
+    description: Books data
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Book'
+
+definitions:
+  Book:
+    properties:
+      author:
+        type: integer
+      id:
+        readOnly: true
+        type: integer
+      title:
+        type: string
+    required:
+      - author
+      - title
+    type: object
