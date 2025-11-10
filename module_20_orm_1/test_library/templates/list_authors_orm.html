@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Городская библиотека
+    </title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<h1>Отдел для студентов.</h1>
+<hr>
+<h1>Список авторов для студентов.</h1>
+
+{% if authors %}
+<table class="customTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Имя автора</th>
+        <th>Фамилия Автора</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for author in authors %}
+    <tr>
+        <td>
+            {{ author.id }}
+        </td>
+        <td>
+            {{ author.name }}
+        </td>
+        <td>
+            {{ author.surname }}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2> Sorry, no books in DB.</h2>
+{% endif %}
+<a href="/">Перейти на главную</a><br>
+</body>
+</html>

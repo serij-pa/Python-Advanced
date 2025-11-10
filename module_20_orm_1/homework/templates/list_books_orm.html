@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Городская библиотека
+    </title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<h1>Отдел для студентов.</h1>
+<hr>
+<h1>Список книг для студентов.</h1>
+
+{% if books %}
+<table class="customTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Количество</th>
+        <th>Дата выхода</th>
+        <th>ID Автора</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+    <tr>
+        <td>
+            {{ book.id }}
+        </td>
+        <td>
+            {{ book.name }}
+        </td>
+        <td>
+            {{ book.count }}
+        </td>
+        <td>
+            {{ book.release_date }}
+        </td>
+        <td>
+            {{ book.author_id }}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2> Sorry, no books in DB.</h2>
+{% endif %}
+
+</body>
+</html>
