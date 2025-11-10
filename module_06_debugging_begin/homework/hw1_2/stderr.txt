@@ -1,0 +1,8 @@
+
+23:19:31 - INFO - Вы пытаетесь аутентифицироваться в Skillbox
+23:19:31 - INFO - У вас есть 3 попыток
+23:19:31 - DEBUG - Начало input_and_check_password
+23:19:35 - WARNING - Вы ввели слишком слабый пароль
+23:19:35 - DEBUG - Начало input_and_check_password
+23:19:55 - DEBUG - Начало input_and_check_password
+23:19:59 - ERROR - Пользователь трижды ввёл не правильный пароль!
