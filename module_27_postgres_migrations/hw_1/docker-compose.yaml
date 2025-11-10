@@ -1,0 +1,28 @@
+services:
+  app:
+    container_name: flask_cont
+    build: .
+    ports:
+      - "5000:5000"
+    networks:
+      - backend
+
+  postgres:
+    container_name: postgres_cont
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - log_destination=stderr
+      - logging_collector=on
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+    volumes:
+      - ./db/:/var/lib/postgresql/data
+
+networks:
+  backend:
+    driver: bridge
