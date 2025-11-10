@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Все задачи выполнены</h3>
+{% if group_id %}
+    <table class="customTable">
+    <thead>
+    <tr>
+        <th>group_id: {{group_id}} </th>
+    </tr>
+    </thead>
+</table>
+{% endif %}
+
+<a href="/status/{{group_id}}">Узнать статус {{group_id}} задачи</a><br>
+<a href='/'>Вернуться на главную</a><br>
+{% endblock %}

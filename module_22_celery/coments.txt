@@ -1,0 +1,138 @@
+    Чтобы загрузить образ, выполните команду:
+
+docker pull redis
+
+    Чтобы запустить контейнер Redis, выполните команду:
+
+docker run -p 6379:6379 --name my-redis -d redis
+
+from celery import Celery
+app = Celery(
+   'tasks',
+   broker='redis://localhost:6379/0',
+   backend='redis://localhost:6379/0'
+)
+@app.task
+def add(x, y):
+   return x + y
+
+
+
+Чтобы добавить еще одну задачу в существующую группу Celery,
+нужно использовать метод apply_async для каждого нового элемента,
+который нужно добавить, и передать его в уже существующую группу. Вот пример:
+Python
+
+from celery import group
+from your_app.tasks import my_task
+# Замените на ваши реальные импорты
+
+# Создаем или получаем существующую группу
+my_group = group(my_task.s(i) for i in range(5))
+# Пример с 5 задачами
+
+# Добавляем новую задачу
+new_task = my_task.s(5) # Задача с аргументом 5
+my_group.apply_async(args=[new_task]) # Добавляем новую задачу в группу
+
+# Получаем результат всех задач
+result = my_group.apply_async()
+results = result.get()
+print(results)
+
+Пояснение:
+
+    1. group(my_task.s(i) for i in range(5)):
+    Создает группу, содержащую задачи my_task с аргументами от 0 до 4.
+    2. new_task = my_task.s(5):
+    Создает новую задачу с аргументом 5.
+    3. my_group.apply_async(args=[new_task]):
+    Добавляет new_task в существующую группу. Обратите внимание, что apply_async принимает аргументы в виде списка args. В данном случае мы передаем список, содержащий только одну задачу new_task.
+    4. result = my_group.apply_async():
+    Выполняет все задачи в группе асинхронно и возвращает объект результата.
+    5. results = result.get():
+    Получает результаты выполнения всех задач в группе.
+
+Важно:
+
+    Убедитесь, что у вас правильно настроены Celery и брокер сообщений (например, Redis или RabbitMQ).
+    Замените your_app.tasks на путь к вашему файлу с задачами Celery и my_task на имя вашей задачи.
+    В примере используется apply_async, чтобы выполнить задачи асинхронно. Если вам нужно выполнить задачи синхронно, используйте apply.
+    Для получения результатов задач используйте result.get(). Это блокирует выполнение до тех пор, пока все задачи не будут завершены.
+    Обратите внимание на правильную обработку ошибок и исключений при работе с асинхронными задачам
+
+
+        Для последовательного выполнения задач в группе Celery нужно
+использовать chain или group в сочетании с chord. chain позволяет
+выполнять задачи последовательно, одна за другой, а chord обеспечивает
+выполнение финальной задачи после завершения всех задач в группе.
+
+            Использование chain:
+from celery import chain, group
+
+@app.task
+def add(x, y):
+    return x + y
+
+@app.task
+def mul(x, y):
+    return x * y
+
+@app.task
+def xsum(numbers):
+    return sum(numbers)
+
+# Создаем группу задач
+tasks = [add.s(i, i) for i in range(5)]
+g = group(tasks)
+
+# Создаем цепочку задач, где результат add будет передан в mul
+result = chain(g | mul.s(2)).apply_async()
+
+# Результат будет доступен после выполнения всех задач
+print(result.get()) # Output: 20
+
+# Или, если нужно выполнить несколько цепочек
+result = chain(add.s(1, 2), mul.s(3), add.s(4)).apply_async()
+print(result.get()) # Output: 13
+
+
+            Использование chord:
+from celery import chain, group, chord
+
+@app.task
+def add(x, y):
+    return x + y
+
+@app.task
+def mul(x, y):
+    return x * y
+
+@app.task
+def sum_it(numbers):
+    return sum(numbers)
+
+# Создаем группу задач
+tasks = [add.s(i, i) for i in range(5)]
+g = group(tasks)
+
+# Создаем хорд, где финальная задача sum_it будет выполнена после завершения g
+result = chord((g | mul.s(2)), sum_it.s()).apply_async()
+
+# result.get() вернет результат выполнения sum_it
+print(result.get()) # Output: 20
+
+# Или, если нужно выполнить несколько хордов
+result = chord((add.s(1, 2) | mul.s(3), add.s(4, 5)), sum_it.s()).apply_async()
+print(result.get()) # Output: 15
+
+
+Краткое описание:
+
+    chain: Выполняет задачи последовательно, передавая результат предыдущей задачи в следующую.
+    group: Выполняет набор задач параллельно.
+    chord: Выполняет набор задач параллельно, а затем выполняет финальную задачу после завершения всех задач в группе.
+
+В обоих примерах, apply_async() используется для асинхронного выполнения задач.
+Результаты можно получить с помощью result.get(). Не забудьте заменить app на
+ваш Celery приложение и определить ваши задачи add, mul и sum_it

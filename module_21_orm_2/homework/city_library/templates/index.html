@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Городская библиотека
+    </title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<h1>Книги hw4:</h1>
+{% if books %}
+{% if descriptions %}
+<table class="customTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Автор</th>
+        <th>Просмотры</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+    <tr>
+        <td>
+            <a href="/books/{{ book.id }}">{{ book.id }}</a>
+        </td>
+        <td>
+            {{ book.title }}
+        </td>
+        <td>
+            {{ book.author }}
+        </td>
+        <td>
+            {% for description in descriptions %}
+            {% if book.id == description[3] %}
+                {{ description[2] }}
+            {% endif %}
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2> Sorry, no books in DB.</h2>
+{% endif %}
+{% endif %}
+<a href="/books">На главную</a><br>
+<a href="/books/form">Добавить книгу</a><br>
+<a href="/books/author">Поиск по автору</a><br>
+
+</body>
+</html>
