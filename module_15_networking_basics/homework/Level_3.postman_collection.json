@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "f34d8663-93a0-4e9a-92d3-15ef2de3bf59",
+		"name": "Level_3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41079462"
+	},
+	"item": [
+		{
+			"name": "get-rooms",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rooms\":[\n        {\n            \"beds\": 1,\n            \"floor\": 1,\n            \"guestNum\": 1,\n            \"links\": {\n                \"info_room\": \"/room/1\"\n            },\n            \"price\": 2500,\n            \"roomId\": 1\n        },\n        {\n            \"beds\": 1,\n            \"floor\": 1,\n            \"guestNum\": 2,\n            \"links\": {\n                \"info_room\": \"/room/2\"\n            },\n            \"price\": 2000,\n            \"roomId\": 2\n        },\n        {\n            \"beds\": 1,\n            \"floor\": 1,\n            \"guestNum\": 3,\n            \"links\": {\n                \"info_room\": \"/room/3\"\n            },\n            \"price\": 2500,\n            \"roomId\": 3\n        }\n        ]\n}"
+				},
+				"url": {
+					"raw": "{{url}}/room",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"room"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-room",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"floor\": 1,\n    \"beds\": 1,\n    \"guestNum\": 2,\n    \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/room",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"room"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-room",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"roomId\": {{roomId}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/room",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"room"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-booking",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rooms\":[\n        {\n            \"beds\": 1,\n            \"floor\": 1,\n            \"guestNum\": 2,\n            \"links\": {\n                \"info_booking\": \"/room/4\"\n            },\n            \"price\": 1000,\n            \"roomId\": 4\n        }\n        ]\n}"
+				},
+				"url": {
+					"raw": "{{url}}/booking",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"roomId\": {{roomId}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/booking",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "booking cancel",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"roomId\": {{roomId}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/booking",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "info-booking",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookedRoom\":[\n        {\n            \"beds\": 1,\n            \"floor\": 1,\n            \"guestNum\": 2,\n            \"price\": 1000,\n            \"description\": \"описание комнаты\"\n        }\n        ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/booking",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "info-room",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookedRoom\":[\n        {\n            \"beds\": 1,\n            \"floor\": 1,\n            \"guestNum\": 2,\n            \"price\": 1000,\n            \"description\": \"описание комнаты\"\n        }\n        ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/room",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"room"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "room-booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"roomId\": {{roomId}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/room",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"room"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	]
+}

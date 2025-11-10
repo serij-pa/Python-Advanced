@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-style-10">
+    <h1>Добавить новую книгу hw1!<span>Просмотрите поля и добавьте новые книги в базу!</span></h1>
+    <form action="/books/form" method="post">
+        <div class="section"><span>1</span>Название книги</div>
+        <div class="inner-wrap">
+            <label>Название книги<input type="text" name="book_title"/></label>
+        </div>
+
+        <div class="section"><span>2</span>Полное имя автора</div>
+        <div class="inner-wrap">
+            <label>Полное имя автора<input type="text" name="author_name"/></label>
+        </div>
+
+        <div class="button-section">
+            <input type="submit" name="Add new book"/>
+        </div>
+    </form>
+</div>
+{% endblock %}

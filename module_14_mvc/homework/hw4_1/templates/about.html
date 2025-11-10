@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+{% if book %}
+<table class="customTable">
+    <thead>
+    <tr>
+        <th>Описание</th>
+        <th>Количество просмотров</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            {{ book[1] }}
+        </td>
+        <td>
+            {{ book[2] }}
+        </td>
+    </tr>
+    </tbody>
+</table>
+{% else %}
+<h2>Книга не найдена</h2>
+{% endif %}
+<a href="/book">На главную</a><br>
+{% endlock %}

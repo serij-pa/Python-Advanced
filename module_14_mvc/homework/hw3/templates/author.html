@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-style-10">
+    <h1>Поиск книги по автору hw3!<span>Введите имя автора!</span></h1>
+    <form action="/books/author" method="post" enctype="multipart/form-data">
+        <div class="section"><span>1</span>Автор книги</div>
+        <div class="inner-wrap">
+          {{ form.author }}
+        </div>
+
+        <div class="button-section">
+            <input type="submit" name="Поиск по автору"/>
+        </div>
+    </form>
+</div>
+{% endblock %}
