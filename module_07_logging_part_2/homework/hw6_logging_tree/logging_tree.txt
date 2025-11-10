@@ -1,0 +1,14 @@
+<--""
+   Level WARNING
+   |
+   o<--"module_logger"
+       Level DEBUG
+       Handler File '/home/seriy-pa/PycharmProjects/python_advanced/module_07_logging_part_2/homework/hw6_logging_tree/logfile.log'
+         Level DEBUG
+         Formatter fmt='%(levelname)s | %(name)s | %(message)s' datefmt=None
+       Handler Stream <_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>
+         Level DEBUG
+         Formatter fmt='%(levelname)s | %(name)s | %(message)s' datefmt=None
+       |
+       o<--"module_logger.logger"
+           Level DEBUG

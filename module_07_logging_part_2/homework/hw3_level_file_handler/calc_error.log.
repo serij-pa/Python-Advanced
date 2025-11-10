@@ -1,0 +1,2 @@
+ERROR | my_logger.app | Error while converting number 2
+ERROR | my_logger.app | could not convert string to float: 't'
